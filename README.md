@@ -14,7 +14,7 @@ This project was done as a class assignment and it's NodeJS based. I chose to wo
     cd lotr-info
     ```
 
-* Install dependencies for the module and application
+* Install dependencies
     ```bash
     cd lotr-api && npm install
     cd ../lotr-app && npm install
