@@ -1,0 +1,16 @@
+{
+  "name": "lotr-app",
+  "version": "1.0.0",
+  "description": "an application to interact with the one module to rule them all",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Youssef Elzein",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.1",
+    "lotr-api": "file:../lotr-api",
+    "yargs": "^17.3.1"
+  }
+}

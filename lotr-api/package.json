@@ -1,0 +1,14 @@
+{
+  "name": "lotr-api",
+  "version": "1.0.0",
+  "description": "a module to interact with the one api to rule them all",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Youssef Elzein",
+  "license": "ISC",
+  "dependencies": {
+    "superagent": "^7.1.1"
+  }
+}
