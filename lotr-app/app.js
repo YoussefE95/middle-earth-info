@@ -35,8 +35,9 @@ const _print = (type, obj) => {
         console.log(`Race: ${obj.race}`);
         console.log(`Birth: ${obj.birth}`);
         console.log(`Death: ${obj.death}`);
-        if (obj.randomQuote){
-            console.log(`Random Quote:\n"${obj.randomQuote}"`);
+        if (obj.quotes.length > 0){
+            const random = Math.floor(Math.random()*obj.quotes.length);
+            console.log(`Random Quote:\n"${obj.quotes[random].dialog}"`);
         }
     } else if (type === 'book') {
         console.log(`Name: ${obj.name}`);
@@ -51,19 +52,7 @@ const _print = (type, obj) => {
 const searchMiddleEarth = async (type, phrase) => {
     const userInput = await _selectionPrompt(type, phrase);
     if (userInput) {
-        const selection = (await middleEarth.getInfo(type, userInput.objectID)).docs[0];
-
-        if (type === 'character') {
-            const quotes = (await middleEarth.getInfo('quote', userInput.objectID)).docs;
-            if (quotes.length > 0) {
-                const random = Math.floor(Math.random()*quotes.length);
-                selection.randomQuote = quotes[random].dialog;
-            }
-        } else if (type === 'book') {
-            selection.chapters = (await middleEarth.getInfo('chapter', userInput.objectID)).docs;
-        }
-
-        _print(type, selection);
+        _print(type, await middleEarth.getInfo(type, userInput.objectID));
     }
 };
 

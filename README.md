@@ -3,11 +3,16 @@ This project was done as a class assignment and it's NodeJS based. I chose to wo
 
 ## lotr-api
 * *index.js* is a module which contains the functions for interacting with the one api using [superagent](https://www.npmjs.com/package/superagent)
-  * *searchFor* searches for all *type* (book, character, or movie) containing *phrase* in its name
-  * *getInfo* is used to search for a specific *type* (book, character, or movie) with *id*. Since the one api separates quotes from characters and chapters from books, this function also supports searching for all quotes associated to a specific character and all chapters belonging to a specific book
+  * **searchFor** searches for all *type* (book, character, or movie) containing *phrase* in its name
+  * **getInfo** is used to search for a specific *type* (book, character, or movie) with *id*. Since the one api separates quotes from characters and chapters from books, this function also pulls that data from the separate endpoints and combines them for convenience. Movies get all the respective data from one endpoint so no further work is required for that search.
 
 ## lotr-app 
-* A cli app which uses lotr-api. This provides the user the ability to search for books, characters, and movies in the Lord of the Rings universe from the convenience of their terminal
+* A cli app which allows the user to search for books, characters, and movies pertaining to the Lord of the Rings universe from the convenience of their terminal
+* *app.js* uses lotr-api for performing searches and [inquirer](https://www.npmjs.com/package/inquirer) for displaying the initial search results in a scrollable list
+  * **_selectionPrompt** performs the initial search given *type* and *phrase*. If the search has results, a scrollable list is displayed and the user can select a specific result. This function returns the id of the selected result or 0 if there wasn't results to the initial search
+  * ***print** will organize and display the specific result
+  * **searchMiddleEarth** first calls **_selectionPrompt**. If there's a valid *id*, a specific search is done and then displayed with **print**
+* *cli.js* uses [yargs](https://www.npmjs.com/package/yargs) to parse the given arguments and to validate their types. It also prints information about what is expected, in terms of arguments, if the given argument is "help"
 
 ## How to use
 * Clone this repository:

@@ -16,20 +16,28 @@ const searchFor = async (type, phrase) => {
 
 const getInfo = async (type, id) => {
     try {
-        let url;
-        if (type === 'quote') {
-            url = `${config.url}/character/${id}/${type}`;
-        } else if (type === 'chapter') {
-            url = `${config.url}/book/${id}/${type}`;
-        } else {
-            url = `${config.url}/${type}/${id}`;
-        }
-
+        let url = `${config.url}/${type}/${id}`;
         const response = await superagent
             .get(url)
             .auth(config.auth, {type: 'bearer'});
 
-        return response.body;
+        if (type === 'book') {
+            url = `${config.url}/${type}/${id}/chapter`;
+            const chapterResponse = await superagent
+            .get(url)
+            .auth(config.auth, {type: 'bearer'});
+
+            response.body.docs[0].chapters = chapterResponse.body.docs;
+        } else if (type === 'character') {
+            url = `${config.url}/${type}/${id}/quote`;
+            const quotesResponse = await superagent
+            .get(url)
+            .auth(config.auth, {type: 'bearer'});
+
+            response.body.docs[0].quotes = quotesResponse.body.docs;
+        }
+
+        return response.body.docs[0];
     } catch(error) {
         console.log(error);
     }

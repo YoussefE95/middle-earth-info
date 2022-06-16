@@ -1,1 +1,5 @@
 lotr-api/config.json
+lotr-api/node_modules
+lotr-api/package-lock.json
+lotr-app/node_modules
+lotr-app/package-lock.json
